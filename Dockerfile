@@ -76,4 +76,7 @@ RUN sudo chown -R opam /home/opam/benchmarks
 RUN sudo chown -R opam /home/opam/fix_experiment
 RUN mkdir /home/opam/fix_result
 
-CMD ["/bin/bash"]
+WORKDIR /home/opam/SmartFix
+COPY run_on_smartbugs.py run_on_smartbugs.py
+RUN mkdir smartbugs
+RUN mkdir results
