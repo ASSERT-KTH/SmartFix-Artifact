@@ -57,7 +57,7 @@ def get_args(smartbugs_dir, output_dir):
     for entry in data:
         path = smartbugs_dir + "/" + entry.get('path')
         contract = entry.get('contract_names')[0]
-        args.append([path, contract, output_dir])
+        args.append((path, contract, output_dir))
 
     return args
 
@@ -69,13 +69,14 @@ def write_log(res, output_dir):
         mid, file = get_mid_dir(path)
         outdir = os.path.join(output_dir, mid)
         outdir = os.path.join(outdir, file)
+        os.makedirs(outdir, exist_ok=True)
         stdout_file = os.path.join(outdir, file+ ".out")
         stderr_file = os.path.join(outdir, file+ ".log")
         with open(stdout_file, 'w') as file:
             file.write(stdout)
         with open(stderr_file, 'w') as file:
             file.write(stderr)
-        
+
 
 def main():
 
