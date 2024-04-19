@@ -63,19 +63,24 @@ def get_args(smartbugs_dir, output_dir):
 
 def write_log(res, output_dir):
     for r in res:
-        stdout = r[4]
-        stderr = r[5]
-        path = r[0]
-        mid, file = get_mid_dir(path)
-        outdir = os.path.join(output_dir, mid)
-        outdir = os.path.join(outdir, file)
-        os.makedirs(outdir, exist_ok=True)
-        stdout_file = os.path.join(outdir, file+ ".out")
-        stderr_file = os.path.join(outdir, file+ ".log")
-        with open(stdout_file, 'w') as file:
-            file.write(stdout)
-        with open(stderr_file, 'w') as file:
-            file.write(stderr)
+        try:
+            stdout = str(r[4])
+            stderr = str(r[5])
+            path = r[0]
+            mid, file = get_mid_dir(path)
+            outdir = os.path.join(output_dir, mid)
+            outdir = os.path.join(outdir, file)
+            os.makedirs(outdir, exist_ok=True)
+            stdout_file = os.path.join(outdir, file+ ".out")
+            stderr_file = os.path.join(outdir, file+ ".log")
+            with open(stdout_file, 'w') as file:
+                file.write(stdout)
+            with open(stderr_file, 'w') as file:
+                file.write(stderr)
+        except Exception as e:
+            print(e)
+        except Error as e:
+            print(e)
 
 
 def main():
